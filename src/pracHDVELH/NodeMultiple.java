@@ -38,6 +38,7 @@ public class NodeMultiple {
 		if(i>=NODE_MAX_ARITY || i<0)
 		{
 			ErrorNaiveHandler.abort();
+			//tb
 		}
 		return daughters[i];
 	} //getDaughter fin
