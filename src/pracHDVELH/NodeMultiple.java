@@ -5,6 +5,7 @@
  */
 package pracHDVELH;
 
+
 import myUtils.ErrorNaiveHandler;
 
 /**
@@ -15,12 +16,14 @@ public class NodeMultiple {
 	public static final int ERROR_STATUS_INDEX_OUT_OF_RANGE = -1;
 	public static final String ERROR_MSG_INDEX_OUT_OF_RANGE = "Index out of range";
 	public static int NODE_MAX_ARITY = 10;
+	public static Object data;
+	public static NodeMultiple[]daughters = new NodeMultiple[NODE_MAX_ARITY];
 
 	/* Overridden methods */
 	@Override
 	public String toString() {
-		/* TO BE COMPLETED */
-	}
+		return data.toString(); //on retourne le TooString
+	} //toString fin
 
 	/* Getters/Setters */
 	/**
@@ -32,8 +35,12 @@ public class NodeMultiple {
 	 * @return the {@code i}th daughter node, or {@code null} if it does not exist.
 	 */
 	public NodeMultiple getDaughter(int i) {
-		/* TO BE COMPLETED */
-	}
+		if(i>=NODE_MAX_ARITY || i<0)
+		{
+			ErrorNaiveHandler.abort();
+		}
+		return daughters[i];
+	} //getDaughter fin
 
 	/**
 	 * Sets the {@code i}th daughter node to the input parameter {@code daughter}.
@@ -48,10 +55,15 @@ public class NodeMultiple {
 	 * 
 	 * @param daughter the node to be linked as a daughter of {@code this} node.
 	 * @param i        the daughter node's index
+	 *
 	 */
 	public void setDaughter(NodeMultiple daughter, int i) {
-		/* TO BE COMPLETED */
-	}
+
+		if (i >= NODE_MAX_ARITY)
+			return;
+		daughters[i] = daughter;
+
+	} //setDaughter fin
 
 	/**
 	 * @return all the daughters
@@ -64,7 +76,7 @@ public class NodeMultiple {
 	 * @param daughters the daughters to set
 	 */
 	public void setDaughters(NodeMultiple[] daughters) {
-		/* TO BE COMPLETED */
+		this.daughters=daughters;
 	}
 
 	/**
@@ -76,7 +88,15 @@ public class NodeMultiple {
 	 * @param daughter
 	 */
 	public void addDaughter(NodeMultiple daughter) {
-		/* TO BE COMPLETED */
+		if(daughter == null)return;
+		int i = 0;
+		while(daughters[i] !=null && i < NODE_MAX_ARITY) {
+			++i;
+		}
+		if ( i < NODE_MAX_ARITY)
+			daughters[i] = daughter;
+
+
 	}
 
 	/**
