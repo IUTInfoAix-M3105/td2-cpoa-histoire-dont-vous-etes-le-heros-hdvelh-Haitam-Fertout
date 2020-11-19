@@ -15,8 +15,47 @@ import myUtils.ErrorNaiveHandler;
  */
 public class Event extends NodeMultiple {
 	public static final String ERROR_MSG_UNEXPECTED_END = "Sorry, for some unexpected reason the story ends here...";
+
 	public static final String PROMPT_ANSWER = "Answer: ";
+
 	public static final String WARNING_MSG_INTEGER_EXPECTED = "Please input a integer within range!";
+
+	/** ID **/
+	public int id;
+
+
+
+	/**
+	 * the graphical user interface
+	 */
+	private GUIManager gui;
+
+	//private Object data;
+
+	/**
+	 * the text version of the player's current answer
+	 */
+	private String playerAnswer;
+
+	/**
+	 * the daughter's index chosen for the next event
+	 */
+	private int chosenPath;
+
+
+
+	/**
+	 * the class variable to store the last id used
+	 */
+	static private int lastId = -1;
+
+
+	/**
+	 * The input reader
+	 */
+	private Scanner reader;
+
+
 
 	/**
 	 * @return the playerAnswer
@@ -93,12 +132,7 @@ public class Event extends NodeMultiple {
 		/* TO BE COMPLETED */
 	}
 
-	/**
-	 * @return the gui
-	 */
-	public GUIManager getGui() {
-		/* TO BE COMPLETED */
-	}
+
 
 	/**
 	 * @param gui the gui to set
@@ -108,15 +142,48 @@ public class Event extends NodeMultiple {
 	}
 
 	/**
+	 * @return the gui
+	 */
+	public GUIManager getGui() {
+		/* TO BE COMPLETED */
+	}
+
+	/**
 	 * @return the id
 	 */
 	public int getId() {
-		/* TO BE COMPLETED */
+		return id;
 	}
 
 	/* Methods */
 	/* TO BE COMPLETED */
+	public void run(){
+		gui.outputln(toString());
+		gui.output(PROMPT_ANSWER);
+		playerAnswer=reader.next();
+		chosenPath=interpretAnswer();
+		return getDaughter(chosenPath);
 	}
+
+	//Constructors
+	/**
+	 * Default constructor.
+	 */
+	public Event() {
+		this(new GUIManager(),"");
+
+	}
+
+	public Event(GUIManager gui, String data) {
+		super(data);
+		this.gui = gui;
+		id = ++lastId;
+		chosenPath = 0;
+		reader = gui.getInputReader();
+
+	}
+
+
 }
 
 // eof
