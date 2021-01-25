@@ -13,58 +13,66 @@ import java.util.Scanner;
  *
  */
 public class GUIManager {
-  private PrintStream out, err;
-  private InputStream in;
-  private Scanner inputReader;
+    private PrintStream out, err;
+    private InputStream in;
+    private Scanner inputReader;
 
-  /**
-   * @param s
-   */
-  public void outputln(String s) {
-	out.println(s);
-  }
+    /**
+     * @param s
+     */
+    public void outputln(String s) {
 
-  /**
-   * Concatenates all the given strings and prints them out without any
-   * end-of-line character ('\n').
-   * 
-   * @param args
-   */
-  public void output(String... args) {
-	StringBuilder s = new StringBuilder();
-	for (String i : args) {
-	  if (s != null) {
-		s.append(i);
-	  }
-	}
-	out.println(s);
-  }
+        out.println(s);
 
-  /**
-   * @return
-   */
-  public Scanner getInputReader() {
-	return inputReader;
-  }
+    }
 
-  /**
-   * Constructor. Sets the GUI to the default system IOs.
-   */
-  public GUIManager() {
-	this(System.in, System.out, System.err);
-  }
+    /**
+     * Concatenates all the given strings and prints them out without any
+     * end-of-line character ('\n').
+     *
+     * @param args
+     */
+    public void output(String... args) {
+        StringBuilder s = new StringBuilder();
+        for (String i : args) {
+            if (s != null) {
+                s.append(i);
+            }
+        }
+        out.println(s);
+    }
 
-  /**
-   * @param in
-   * @param out
-   * @param err
-   */
-  public GUIManager(InputStream in, PrintStream out, PrintStream err) {
-	this.in = in;
-	this.out = out;
-	this.err = err;
-	inputReader = new Scanner(this.in);
-  }
+    /**
+     * @return
+     */
+    public Scanner getInputReader() {
+
+        return inputReader;
+
+    }
+    public void setInputReader(Scanner inputReader) { this.inputReader = inputReader; };
+
+
+    /**
+     * Constructor. Sets the GUI to the default system IOs.
+     */
+    public GUIManager() {
+
+        this(System.in, System.out, System.err);
+
+    }
+
+    /**
+     * @param in
+     * @param out
+     * @param err
+     */
+    public GUIManager(InputStream in, PrintStream out, PrintStream err) {
+        this.in = in;
+        this.out = out;
+        this.err = err;
+        inputReader = new Scanner(this.in);
+    }
 }
 
 // eof

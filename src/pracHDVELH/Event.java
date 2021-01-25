@@ -5,98 +5,79 @@
  */
 package pracHDVELH;
 
+import java.net.IDN;
 import java.util.Scanner;
 
+import jdk.jfr.Unsigned;
 import myUtils.ErrorNaiveHandler;
+import org.w3c.dom.Node;
 
 /**
  * @author prost
  *
  */
 public class Event extends NodeMultiple {
-	public static final String ERROR_MSG_UNEXPECTED_END = "Sorry, for some unexpected reason the story ends here...";
-
-	public static final String PROMPT_ANSWER = "Answer: ";
-
-	public static final String WARNING_MSG_INTEGER_EXPECTED = "Please input a integer within range!";
-
-	/** ID **/
-	public int id;
-
-
-
-	/**
-	 * the graphical user interface
-	 */
 	private GUIManager gui;
-
-	//private Object data;
-
-	/**
-	 * the text version of the player's current answer
-	 */
+	private int id;
+	private int chosenPath;
 	private String playerAnswer;
 
-	/**
-	 * the daughter's index chosen for the next event
-	 */
-	private int chosenPath;
-
-
-
-	/**
-	 * the class variable to store the last id used
-	 */
 	static private int lastId = -1;
 
+	public static final String ERROR_MSG_UNEXPECTED_END = "Sorry, for some unexpected reason the story ends here...";
+	public static final String PROMPT_ANSWER = "Answer: ";
+	public static final String WARNING_MSG_INTEGER_EXPECTED = "Please input a integer within range!";
 
-	/**
-	 * The input reader
-	 */
-	private Scanner reader;
+	public Event () {
 
-
+	}
+	public Event (GUIManager gui, String data) {
+		super(data);
+		this.gui = gui;
+		id = ++lastId;
+		chosenPath = -1;
+	}
 
 	/**
 	 * @return the playerAnswer
 	 */
 	public String getPlayerAnswer() {
-		/* TO BE COMPLETED */
+		return playerAnswer;
 	}
 
 	/**
 	 * @param playerAnswer the playerAnswer to set
 	 */
 	public void setPlayerAnswer(String playerAnswer) {
-		/* TO BE COMPLETED */
+		this.playerAnswer = playerAnswer;
 	}
 
 	/**
 	 * @return the reader
 	 */
 	public Scanner getReader() {
-		/* TO BE COMPLETED */
+		return gui.getInputReader();
 	}
 
 	/**
 	 * @param reader the reader to set
 	 */
 	public void setReader(Scanner reader) {
-		/* TO BE COMPLETED */
+		gui.setInputReader(reader);
 	}
 
 	/**
 	 * @return the chosenPath
 	 */
 	public int getChosenPath() {
-		/* TO BE COMPLETED */
+		return chosenPath;
 	}
 
 	/**
 	 * @param chosenPath the chosenPath to set
 	 */
 	public void setChosenPath(int chosenPath) {
-		/* TO BE COMPLETED */
+		this.chosenPath = chosenPath;
 	}
 
 	/* Methods */
@@ -104,7 +85,7 @@ public class Event extends NodeMultiple {
 	 * @see pracHDVELH.NodeMultiple#getData()
 	 */
 	public String getData() {
-		/* TO BE COMPLETED */
+		return getData();
 	}
 
 	/**
@@ -112,15 +93,14 @@ public class Event extends NodeMultiple {
 	 * @param data
 	 */
 	public void setData(String data) {
-		/* TO BE COMPLETED */
+		setData(data);
 	}
 
 	/**
 	 * @see pracHDVELH.NodeMultiple#getDaughter(int)
 	 */
-	@Override
 	public Event getDaughter(int i) {
-		/* TO BE COMPLETED */
+	return getDaughter();
 	}
 
 	/**
@@ -129,23 +109,21 @@ public class Event extends NodeMultiple {
 	 * @param i
 	 */
 	public void setDaughter(Event daughter, int i) {
-		/* TO BE COMPLETED */
-	}
 
-
-
-	/**
-	 * @param gui the gui to set
-	 */
-	public void setGui(GUIManager gui) {
-		/* TO BE COMPLETED */
 	}
 
 	/**
 	 * @return the gui
 	 */
 	public GUIManager getGui() {
-		/* TO BE COMPLETED */
+		return  gui;
+	}
+
+	/**
+	 * @param gui the gui to set
+	 */
+	public void setGui(GUIManager gui) {
+		this.gui = gui;
 	}
 
 	/**
@@ -155,35 +133,17 @@ public class Event extends NodeMultiple {
 		return id;
 	}
 
-	/* Methods */
-	/* TO BE COMPLETED */
-	public void run(){
-		gui.outputln(toString());
+	public int processAnswer () {
+		return processAnswer();
+	}
+
+	public NodeMultiple run() {
+		gui.output(this.toString());
 		gui.output(PROMPT_ANSWER);
-		playerAnswer=reader.next();
-		chosenPath=interpretAnswer();
+		playerAnswer = getReader().nextLine();
+		chosenPath = processAnswer();
 		return getDaughter(chosenPath);
 	}
-
-	//Constructors
-	/**
-	 * Default constructor.
-	 */
-	public Event() {
-		this(new GUIManager(),"");
-
-	}
-
-	public Event(GUIManager gui, String data) {
-		super(data);
-		this.gui = gui;
-		id = ++lastId;
-		chosenPath = 0;
-		reader = gui.getInputReader();
-
-	}
-
-
 }
 
 // eof
